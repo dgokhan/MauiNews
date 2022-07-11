@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiNews.Views.MainPage"
+             Shell.NavBarIsVisible="False"
+             xmlns:helper="clr-namespace:MauiNews.Resources.Helpers"
+             xmlns:p="clr-namespace:MauiNews.Views"
+             xmlns:model="clr-namespace:MauiNews.Model"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:viewmodel="clr-namespace:MauiNews.ViewModel"
+             x:DataType="viewmodel:MainViewModel"
+             Background="#000000">
+
+    <Grid RowDefinitions="*,80">
+        <ScrollView>
+            <Grid RowDefinitions="60,30,1,380,75,200"
+                      Margin="20,20,0,0">
+                <Grid>
+                    <Grid ColumnDefinitions="*,30,30">
+                        <Label Text="FUNNEWS" TextColor="#FFFF"
+                           FontFamily="PoppinsBold" FontSize="24"/>
+
+                        <Label Grid.Column="1" FontFamily="IconFont" FontSize="20"
+                           Text="{x:Static helper:IconFontHelper.Magnify}" TextColor="#fff"/>
+
+                        <Label Grid.Column="2" FontFamily="IconFont" FontSize="20"
+                           Text="{x:Static helper:IconFontHelper.Bell}" TextColor="#fff"/>
+
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <StackLayout Orientation="Horizontal" Spacing="30">
+                        <Label Text="Trending" TextColor="#FFFF"
+                       FontFamily="PoppinsBold" FontSize="12"/>
+
+                        <Label Text="Covid-19" TextColor="#FFFF"
+                       FontFamily="PoppinsBold" FontSize="12"/>
+
+                        <Label Text="Politics" TextColor="#FFFF"
+                       FontFamily="PoppinsBold" FontSize="12"/>
+
+                        <Label Text="Sports" TextColor="#FFFF"
+                       FontFamily="PoppinsBold" FontSize="12"/>
+
+                        <Label Text="Celebrity" TextColor="#FFFF"
+                       FontFamily="PoppinsBold" FontSize="12"/>
+                    </StackLayout>
+                </Grid>
+
+                <Line Grid.Row="2" 
+                  WidthRequest="25" HorizontalOptions="Start"
+                  BackgroundColor="#E9E00C"/>
+
+                <CollectionView Grid.Row="3" 
+                    x:Name="listNews"
+                    HorizontalScrollBarVisibility="Never"
+                    ItemsSource="{Binding News}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:NewsModel">
+                            <Grid WidthRequest="275">
+                                <Frame BackgroundColor="#151515"
+                                    CornerRadius="20" 
+                                    BorderColor="Transparent">
+                                    <Grid RowDefinitions="150,20,115,25,20" BackgroundColor="#151515">
+                                        <Grid>
+                                            <Image Source="{Binding Image}"/>
+
+                                            <Button Text="{x:Static helper:IconFontHelper.Bookmark}" TextColor="#FFFFF"
+                                                FontSize="20" FontFamily="IconFont"
+                                                BackgroundColor="#E9E00C"
+                                                VerticalOptions="Start" HorizontalOptions="End"
+                                                WidthRequest="40" HeightRequest="40" CornerRadius="20"/>
+                                        </Grid>
+
+                                        <Label  Grid.Row="1"
+                                            VerticalOptions="Center" Text="{Binding CategoryName}" TextColor="#FFFF"
+                                            FontSize="10" FontFamily="Poppins"/>
+
+                                        <Label Grid.Row="2" 
+                                        Text="{Binding NewsHeadline}" TextColor="#FFFF"
+                                        FontFamily="PoppinsBold" FontSize="17"/>
+
+                                        <Label Grid.Row="3" 
+                                           Text="{Binding NewSource}" TextColor="#FFFF"
+                                           FontFamily="PoppinsBold" FontSize="15"/>
+
+                                        <Grid Grid.Row="4"
+                                            ColumnDefinitions="4*,*,3*,*,3*">
+                                            <Label Text="{Binding Writer}" TextColor="#FFFF"
+                                                FontSize="10" FontFamily="Poppins"/>
+                                            <Label Grid.Column="1" Text="|" TextColor="#FFFF"
+                                                FontSize="10" FontFamily="Poppins"/>
+                                            <Label Grid.Column="2" Text="{Binding ViewsCount, StringFormat='{0} Views'}"                            TextColor="#FFFF"
+                                                FontSize="10" FontFamily="Poppins"/>
+                                            <Label Grid.Column="3" Text="|" TextColor="#FFFF"
+                                                FontSize="10" FontFamily="Poppins"/>
+                                            <Label Grid.Column="4" Text="{Binding DateTime, StringFormat='Time: {0:hh\\:mm}'}" 
+                                               TextColor="#FFFF"
+                                               FontSize="10" FontFamily="Poppins"/>
+                                        </Grid>
+                                    </Grid>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Path=BindingContext.GoToDetailsCommand, Source={x:Reference listNews}}"
+                                            CommandParameter="{Binding .}"
+                                            NumberOfTapsRequired="1" />
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Grid.Row="4" 
+                   VerticalTextAlignment="Center" 
+                   Text="Trending Collection" TextColor="#FFFF"
+                   FontFamily="PoppinsBold" FontSize="20"/>
+
+                <CollectionView Grid.Row="5"
+                    HorizontalScrollBarVisibility="Never"
+                    ItemsSource="{Binding Trends}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="30" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:TrendingCollectionModel">
+                            <Grid WidthRequest="150">
+                                <Frame BackgroundColor="#151515"
+                                    CornerRadius="20" 
+                                    BorderColor="Transparent">
+
+                                    <Image Source="{Binding Image}"/>
+
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </Grid>
+        </ScrollView>
+
+        <p:MenuNavbar Grid.Row="1" VerticalOptions="EndAndExpand" />
+    </Grid>
+
+
+</ContentPage>

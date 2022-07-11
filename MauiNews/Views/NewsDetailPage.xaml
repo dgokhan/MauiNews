@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiNews.Views.NewsDetailPage"
+             xmlns:helper="clr-namespace:MauiNews.Resources.Helpers"
+             xmlns:viewmodel="clr-namespace:MauiNews.ViewModel"
+             x:DataType="viewmodel:NewsDetailViewModel"
+             BackgroundColor="#000000">
+    <Grid RowDefinitions="250,30,70,50,*"
+          Margin="20,0,20,0">
+        
+        <Image Source="{Binding NewsDetail.Image}"/>
+
+        <Label  Grid.Row="1"
+            Text="{Binding NewsDetail.CategoryName}" TextColor="#FFFF"
+            FontSize="10" FontFamily="Poppins"/>
+        
+        <Label Grid.Row="2" 
+            Text="{Binding NewsDetail.NewsHeadline}" TextColor="#FFFF"
+            FontFamily="PoppinsBold" FontSize="17"/>
+
+        <Grid Grid.Row="3"
+            ColumnDefinitions="20,*,20,*,20,*">
+            
+            <Label FontFamily="IconFont" FontSize="12"
+                Text="{x:Static helper:IconFontHelper.Account}" TextColor="#fff"/>
+            <Label Grid.Column="1" Text="{Binding NewsDetail.Writer}" TextColor="#FFFF"
+                FontSize="9" FontFamily="Poppins"/>
+
+            <Label Grid.Column="2" FontFamily="IconFont" FontSize="12"
+                Text="{x:Static helper:IconFontHelper.Eye}" TextColor="#fff"/>
+            <Label Grid.Column="3" Text="{Binding NewsDetail.ViewsCount, StringFormat='{0} Views'}" TextColor="#FFFF"
+                    FontSize="9" FontFamily="Poppins"/>
+
+            <Label Grid.Column="4" FontFamily="IconFont" FontSize="12"
+                Text="{x:Static helper:IconFontHelper.Clock}" TextColor="#fff"/>
+            <Label Grid.Column="5" Text="{Binding NewsDetail.DateTime, StringFormat='Time: {0:hh\\:mm}'}" TextColor="#FFFF"
+                    FontSize="9" FontFamily="Poppins"/>
+        </Grid>
+
+        <Label Grid.Row="4" 
+            Text="{Binding NewsDetail.NewsDetail}" TextColor="#8C8C8C"
+            FontFamily="Poppins" FontSize="12"/>
+
+    </Grid>
+</ContentPage>

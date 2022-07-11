@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiNews.Views.MenuNavbar"
+             Shell.NavBarIsVisible="False"
+             xmlns:helper="clr-namespace:MauiNews.Resources.Helpers"
+             ColumnDefinitions="*,*,*,*"
+             BackgroundColor="#151515">
+
+    <Grid RowDefinitions="60,20"
+              HorizontalOptions="Center" VerticalOptions="Center">
+
+        <Button FontFamily="IconFont" FontSize="40" BackgroundColor="Transparent"
+                Text="{x:Static helper:IconFontHelper.Home}" TextColor="#E9E00C"/>
+        <Label Grid.Row="1" Text="Home" TextColor="#E9E00C"
+                FontFamily="Poppins" HorizontalTextAlignment="Center"/>
+    </Grid>
+
+    <Grid Grid.Column="1" RowDefinitions="60,20"
+            HorizontalOptions="Center" VerticalOptions="Center">
+
+        <Button FontFamily="IconFont" FontSize="40" BackgroundColor="Transparent"
+                Text="{x:Static helper:IconFontHelper.Fire}" TextColor="#fff"/>
+        <Label Grid.Row="1" Text="Trending" TextColor="#fff"
+                FontFamily="Poppins" HorizontalTextAlignment="Center"/>
+    </Grid>
+
+    <Grid Grid.Column="2" RowDefinitions="60,20"
+            HorizontalOptions="Center" VerticalOptions="Center">
+
+        <Button FontFamily="IconFont" FontSize="40" BackgroundColor="Transparent"
+                Text="{x:Static helper:IconFontHelper.Bookmark}" TextColor="#fff"/>
+        <Label Grid.Row="1" Text="Favorite" TextColor="#fff"
+                FontFamily="Poppins" HorizontalTextAlignment="Center"/>
+    </Grid>
+
+    <Grid Grid.Column="3" RowDefinitions="60,20"
+            HorizontalOptions="Center" VerticalOptions="Center">
+
+        <Button FontFamily="IconFont" FontSize="40" BackgroundColor="Transparent"
+                Text="{x:Static helper:IconFontHelper.CheckboxBlankCircle}" TextColor="#fff"/>
+        <Label Grid.Row="1" Text="Profile" TextColor="#fff"
+                FontFamily="Poppins" HorizontalTextAlignment="Center"/>
+    </Grid>
+</Grid>
